@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     
     <style>
@@ -55,8 +55,21 @@
             color: var(--text-light);
         }
 
-        h1 { font-size: 2.5em; text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px;}
-        h2 { font-size: 2em; text-align: center; margin-bottom: 25px; color: var(--accent-gold); }
+        h1 { 
+            font-size: clamp(1.8em, 4vw, 2.5em);
+            text-align: center; 
+            margin-bottom: 40px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+        h2 { 
+            font-size: clamp(1.5em, 3vw, 2em); 
+            text-align: center; 
+            margin-bottom: 25px; 
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
         p, li { color: var(--text-dark); }
         a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
         a:hover { color: var(--accent-gold-hover); }
@@ -73,7 +86,7 @@
 
         .header-container {
             display: flex;
-            justify-content: center; /* Centraliza a logo */
+            justify-content: center; 
             align-items: center;
             width: 90%;
             max-width: 1200px;
@@ -82,7 +95,11 @@
         }
 
         .header-logo img {
-            max-height: 40px;
+            max-height: 50px; /* Increased logo size */
+            transition: transform 0.3s ease;
+        }
+        .header-logo img:hover {
+            transform: scale(1.05);
         }
         
         .header-left, .header-right {
@@ -92,7 +109,7 @@
         }
         .header-left { left: 0; }
         .header-right { right: 0; }
-        .desktop-nav { display: none; } /* Remove desktop nav links */
+        .desktop-nav { display: none; } 
 
         .hamburger-menu {
             background: none;
@@ -102,8 +119,8 @@
             padding: 5px;
         }
         .hamburger-menu svg {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             stroke-width: 2;
         }
 
@@ -119,6 +136,7 @@
             color: var(--text-dark);
             text-transform: uppercase;
             font-size: 0.9em;
+            font-weight: 600;
         }
         .footer-links a:hover {
             color: var(--accent-gold);
@@ -128,7 +146,7 @@
         }
         .footer-socials .social-icon {
             color: var(--text-dark);
-            margin: 0 10px;
+            margin: 0 15px;
         }
         .footer-socials .social-icon:hover {
             color: var(--accent-gold);
@@ -138,18 +156,19 @@
             height: 24px;
         }
 
-        /* Quiz Specific Styles (Mantidos e aprimorados) */
+        /* Quiz Specific Styles */
         .quiz-container {
             background-color: var(--secondary-bg);
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 800px;
             margin: 40px auto;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .step-indicator {
@@ -164,14 +183,14 @@
             background-color: var(--border-color);
             border-radius: 50%;
             margin: 0 8px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
 
         .step-dot.active {
             background-color: var(--accent-gold);
-            transform: scale(1.2);
-            box-shadow: 0 0 8px var(--accent-gold);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--accent-gold);
         }
 
         .quiz-step {
@@ -187,11 +206,6 @@
             transform: translateY(0);
         }
 
-        .quiz-step h2 {
-            margin-bottom: 30px;
-            color: var(--accent-gold);
-        }
-
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -203,7 +217,7 @@
         .option-card {
             background-color: var(--primary-bg);
             border: 2px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -211,130 +225,91 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 120px;
+            min-height: 140px;
             position: relative;
         }
 
         .option-card:hover {
             border-color: var(--accent-gold-hover);
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
+        /* IMPROVED SELECTION STYLE */
         .option-card.selected {
             border-color: var(--accent-gold);
-            box-shadow: 0 0 15px rgba(179, 155, 91, 0.6);
-            background-color: rgba(179, 155, 91, 0.1);
+            box-shadow: 0 0 15px rgba(179, 155, 91, 0.8), 0 0 0 4px rgba(179, 155, 91, 0.4); 
+            background-color: rgba(179, 155, 91, 0.15);
+            transform: scale(1.02);
         }
         
+        .option-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            font-size: 2em;
+            color: var(--success-color); 
+            font-weight: 900;
+            z-index: 5;
+            text-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+        }
+
         .option-card img {
             max-width: 100%;
             height: auto;
-            max-height: 150px;
-            margin-bottom: 10px;
+            max-height: 180px;
+            margin-bottom: 15px;
             border-radius: 4px;
         }
 
         .option-card span {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-light);
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Color Picker Specific */
-        .color-picker {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
         .color-circle {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 3px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
-        .color-circle:hover {
-            border-color: var(--accent-gold-hover);
-            transform: scale(1.1);
+            border: 4px solid var(--border-color); /* Thicker border */
         }
         .color-circle.selected {
             border-color: var(--accent-gold);
-            transform: scale(1.15);
-            box-shadow: 0 0 10px var(--accent-gold);
+            transform: scale(1.2); /* Stronger scale */
+            box-shadow: 0 0 12px var(--accent-gold);
         }
-        .color-circle[data-color="Preta"] { background-color: #0a0a0a; }
-        .color-circle[data-color="Branca"] { background-color: #ffffff; border: 3px solid var(--text-dark); }
-
+        .color-circle[data-color="Branca"] { background-color: #ffffff; border: 4px solid var(--text-dark); }
+        
         #selected-color-text {
-            font-weight: 700;
-            color: var(--accent-gold);
+            font-weight: 800;
         }
 
         /* Navigation Buttons */
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            gap: 15px;
-        }
-
         .quiz-btn {
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            flex-grow: 1;
+            padding: 14px 28px; /* Slightly larger button */
+            border-radius: 8px;
         }
 
-        .quiz-btn:hover:not(:disabled) {
-            background-color: var(--accent-gold-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
+        /* IMPROVED DISABLED STATE */
         .quiz-btn:disabled {
-            background-color: #555;
-            color: #999;
+            background-color: #333; 
+            color: #777; 
             cursor: not-allowed;
-            opacity: 0.7;
-            transform: none;
-            box-shadow: none;
+            opacity: 0.8;
         }
 
         .quiz-btn.whatsapp-final {
-            background-color: var(--success-color); /* WhatsApp green */
-            color: white;
-            font-size: 1.2em;
-            padding: 15px 30px;
-        }
-
-        .quiz-btn.whatsapp-final:hover:not(:disabled) {
-            background-color: #1faa58;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+            font-size: 1.3em;
         }
 
         #quiz-summary {
-            background-color: var(--primary-bg);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px dashed var(--accent-gold);
-            margin-bottom: 30px;
-            text-align: left;
-            white-space: pre-wrap;
-            font-size: 1.1em;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px dashed var(--accent-gold); /* Thicker dashed border */
         }
         #quiz-summary strong {
             color: var(--accent-gold);
@@ -342,151 +317,37 @@
 
         /* Image Gallery for Product */
         .product-gallery-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            height: 300px;
-            align-items: center;
+            height: 350px; /* Increased size for better preview */
         }
         .product-gallery-container img {
             max-height: 100%;
             max-width: 100%;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            transition: transform 0.5s ease-out;
+            transition: opacity 0.4s ease-in-out, transform 0.3s ease-out; /* Added smooth transition */
         }
-
-        /* Modals and other sections (keeping minimal structure) */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
-            display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease; z-index: 1000;
-        }
-
-        .modal-overlay.active {
-            opacity: 1; visibility: visible;
-        }
-
-        .modal-content {
-            background-color: var(--secondary-bg); padding: 30px; border-radius: 8px;
-            max-width: 600px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            position: relative; transform: translateY(-50px); opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease; color: var(--text-dark); text-align: left;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: translateY(0); opacity: 1;
-        }
-
-        .modal-close-btn {
-            position: absolute; top: 15px; right: 15px; background: none; border: none;
-            font-size: 2em; color: var(--text-dark); cursor: pointer; line-height: 1; padding: 0; transition: color 0.3s ease;
-        }
-        .modal-close-btn:hover { color: var(--accent-gold); }
-
-        .modal-content h3 { color: var(--accent-gold); margin-bottom: 20px; text-align: center; }
-
-        .modal-whatsapp-btn {
-            display: block; background-color: var(--success-color); color: white;
-            padding: 12px 20px; border-radius: 6px; text-align: center; margin-top: 25px;
-            transition: background-color 0.3s ease; font-weight: 600;
-        }
-        .modal-whatsapp-btn:hover { background-color: #1faa58; color: white; }
-
-        .size-guide-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .size-guide-table th, .size-guide-table td {
-            border: 1px solid var(--border-color); padding: 10px; text-align: center; color: var(--text-dark);
-        }
-        .size-guide-table th { background-color: var(--primary-bg); color: var(--accent-gold); text-transform: uppercase; }
-        .size-guide-table td strong { color: var(--text-light); }
-        .size-guide-disclaimer { font-size: 0.85em; color: var(--text-dark); margin-top: 10px; }
-
-        /* Preloader */
-        .preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--primary-bg); display: flex; justify-content: center;
-            align-items: center; z-index: 10000; transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-        }
-        .preloader.hidden { opacity: 0; visibility: hidden; }
-        /* A logo-nash.png do seu print é a que está com o nome 'logo-nash.png' */
-        .preloader img { max-width: 100px; animation: pulse 1.5s infinite ease-in-out; } 
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+        .product-gallery-container img.fading {
+            opacity: 0;
+            transform: scale(0.95);
         }
 
         /* Mobile Nav */
-        .mobile-nav {
-            position: fixed; top: 0; left: -100%; width: 70%; max-width: 300px; height: 100%;
-            background-color: var(--primary-bg); box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-            padding-top: 80px; z-index: 200; transition: left 0.3s ease; display: flex; flex-direction: column;
-        }
-        .mobile-nav.active { left: 0; }
         .mobile-nav-link {
-            padding: 15px 20px; color: var(--text-light); text-transform: uppercase;
-            font-weight: 600; border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
         }
-        .mobile-nav-link:hover { background-color: var(--secondary-bg); color: var(--accent-gold); }
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); z-index: 150; display: none;
-        }
-        .overlay.active { display: block; }
-        
-        /* Top Bar */
-        .top-bar { background-color: var(--accent-gold); color: var(--button-text); padding: 8px 0; overflow: hidden; white-space: nowrap; text-align: center; font-size: 0.9em; }
-        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
-        .marquee-content span { margin-right: 50px; font-weight: 500; }
-        .marquee-content strong, .marquee-content a { color: var(--primary-bg); }
-
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-
-        /* FAB (Floating Action Button) - WhatsApp */
-        .fab-container { position: fixed; bottom: 20px; right: 20px; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; }
-        .whatsapp-promo-box {
-            background-color: var(--secondary-bg); color: var(--text-dark); padding: 10px 15px;
-            border-radius: 8px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease;
-            text-align: right; border: 1px solid var(--border-color);
-        }
-        .whatsapp-promo-box small { font-size: 0.8em; color: var(--text-dark); }
-        .whatsapp-fab:hover + .whatsapp-promo-box { opacity: 1; transform: translateX(0); }
-        .whatsapp-fab {
-            background-color: var(--success-color); color: white; width: 55px; height: 55px;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 2em; box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .whatsapp-fab:hover { background-color: #1faa58; transform: scale(1.05); }
-        .whatsapp-fab svg { width: 30px; height: 30px; }
-
-        /* Reveal Effect */
-        .reveal { position: relative; transform: translateY(100px); opacity: 0; transition: all 1s ease; }
-        .reveal.active { transform: translateY(0); opacity: 1; }
         
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            h2 { font-size: 1.6em; }
-            .desktop-nav { display: none; }
-            .header-container { padding: 0 15px; }
-            .quiz-container { padding: 20px; margin: 20px auto; }
-            .options-grid { grid-template-columns: 1fr; }
-            .quiz-btn { font-size: 1em; padding: 10px 15px; }
-            .quiz-navigation { flex-direction: column; gap: 10px; }
-        }
-        @media (min-width: 769px) {
-            .hamburger-menu, .mobile-nav { display: none; }
-            .header-left, .header-right { display: none; }
+            .quiz-container { padding: 25px; margin: 25px auto; border-radius: 8px; }
+            h1 { margin-bottom: 30px; }
+            .option-card { min-height: 100px; padding: 15px; }
+            .option-card img { max-height: 120px; margin-bottom: 10px; }
+            .product-gallery-container { height: 250px; }
         }
     </style>
 </head>
 <body>
 
     <div class="preloader" id="preloader">
-        <img src="assets/images/logo-nash.png" alt="Carregando Nash Company...">
+        <img src="assets/logo-nash.png" alt="Carregando Nash Company...">
     </div>
 
     <nav class="mobile-nav" id="mobile-nav">
@@ -518,12 +379,12 @@
             </div>
             <div class="header-center">
                 <a href="#" class="header-logo" aria-label="Página inicial da Nash Company">
-                    <img src="assets/images/logo-nash.png" alt="Logo da Nash Company" class="logo-img">
+                    <img src="assets/logo-nash.png" alt="Logo da Nash Company" class="logo-img">
                 </a>
             </div>
             <div class="header-right">
                 <button class="hamburger-menu" data-modal-target="modal-guia-tamanhos" aria-label="Guia de Tamanhos" style="margin-right: 0;">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M18 11l-2 2l-2 -2"></path><path d="M6 11l2 2l2 -2"></path></svg>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M18 11l-2 2l-2 -2"></path><path d="M6 11l2 2l2 -2"></path></svg>
                 </button>
             </div>
         </div>
@@ -544,11 +405,11 @@
                 <h2>1. Escolha o Modelo</h2>
                 <div class="options-grid">
                     <div class="option-card" data-value="Protea Tee" onclick="selectOption(1, 'Protea Tee')">
-                        <img src="assets/images/pretaestampada-frente.png" alt="Camiseta Protea Tee">
+                        <img src="assets/pretaestampada-frente.png" alt="Camiseta Protea Tee">
                         <span>Protea Tee</span>
                     </div>
                     <div class="option-card" data-value="Nash Essentials" onclick="selectOption(1, 'Nash Essentials')">
-                        <img src="assets/images/PretalisaFrente.png" alt="Camiseta Nash Essentials">
+                        <img src="assets/PretalisaFrente.png" alt="Camiseta Nash Essentials">
                         <span>Nash Essentials</span>
                     </div>
                 </div>
@@ -690,26 +551,26 @@
         };
         const myPhoneNumber = '71988689508';
 
-        // Mapeamento de Imagens CORRIGIDO conforme o seu print
+        // Mapeamento de Imagens CORRIGIDO (Removido o subdiretório '/images/' e ajustado o casing)
         const productImages = {
             "Protea Tee": {
                 "Preta": {
-                    "frente": "assets/images/pretaestampada-frente.png",
-                    "costas": "assets/images/pretaEstampadaAtras.png" // Corrigido de 'pretaestampadaAtras.png' para 'pretaEstampadaAtras.png' (mantendo o case do seu print)
+                    "frente": "assets/pretaestampada-frente.png",
+                    "costas": "assets/pretaEstampadaAtras.png"
                 },
                 "Branca": {
-                    "frente": "assets/images/BrancaEstampadaFrente.png", // Corrigido
-                    "costas": "assets/images/BrancaEstampadaCostras.png" // Corrigido de 'BrancaestampadaCostras.png' para 'BrancaEstampadaCostras.png'
+                    "frente": "assets/BrancaestampadaFrente.png", 
+                    "costas": "assets/BrancaEstampadaCostras.png" 
                 }
             },
             "Nash Essentials": {
                 "Preta": {
-                    "frente": "assets/images/PretalisaFrente.png", // Corrigido
-                    "costas": "assets/images/PretaLisaCostas.png" // Corrigido
+                    "frente": "assets/PretalisaFrente.png", 
+                    "costas": "assets/PretaLisaCostas.png" 
                 },
                 "Branca": {
-                    "frente": "assets/images/BrancaLisaFrente.png", // Corrigido
-                    "costas": "assets/images/BrancaLisaCostas.png" // Corrigido
+                    "frente": "assets/BrancaLisaFrente.png", 
+                    "costas": "assets/BrancaLisaCostas.png" 
                 }
             }
         };
@@ -842,19 +703,26 @@
             const productImageElement = document.getElementById('product-display-image');
             const { produto, cor } = selections;
 
-            // Só tenta carregar se produto e cor estiverem selecionados
-            if (produto && cor && productImages[produto] && productImages[produto][cor]) {
-                productImageElement.src = productImages[produto][cor].frente;
-                productImageElement.alt = `Preview da Camisa ${produto} na cor ${cor} (Frente)`;
-                productImageElement.style.display = 'block';
-            } else if (produto && !cor) {
-                 // Se o produto estiver selecionado, mas a cor não, exibe uma das imagens como default (ex: preto frente)
-                 productImageElement.src = productImages[produto]["Preta"].frente;
-                 productImageElement.alt = `Preview da Camisa ${produto} (Selecione a cor)`;
-                 productImageElement.style.display = 'block';
-            } else {
-                productImageElement.style.display = 'none';
-            }
+            productImageElement.classList.add('fading'); // Start fade effect
+
+            setTimeout(() => {
+                 // Só tenta carregar se produto e cor estiverem selecionados
+                if (produto && cor && productImages[produto] && productImages[produto][cor]) {
+                    productImageElement.src = productImages[produto][cor].frente;
+                    productImageElement.alt = `Preview da Camisa ${produto} na cor ${cor} (Frente)`;
+                    productImageElement.style.display = 'block';
+                } else if (produto && !cor) {
+                     // Se o produto estiver selecionado, mas a cor não, exibe uma das imagens como default (ex: preto frente)
+                     productImageElement.src = productImages[produto]["Preta"].frente;
+                     productImageElement.alt = `Preview da Camisa ${produto} (Selecione a cor)`;
+                     productImageElement.style.display = 'block';
+                } else {
+                    productImageElement.style.display = 'none';
+                }
+                
+                productImageElement.classList.remove('fading'); // End fade effect
+            }, 300); // Match the CSS transition time
+           
         }
 
         function sendToWhatsApp() {
