@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Seu Pedido - NASH COMPANY</title>
+    
+    <meta name="description" content="NASH COMPANY: Monte sua camiseta personalizada Protea Tee ou Nash Essentials e envie o pedido via WhatsApp.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    
+    <style>
+        /* Base Styles - Black, White, Gold Theme */
+        :root {
+            --primary-bg: #0a0a0a; /* Dark background */
+            --secondary-bg: #1c1c1c; /* Slightly lighter dark for containers */
+            --text-light: #ffffff;
+            --text-dark: #cccccc;
+            --accent-gold: #b39b5b; /* Gold accent */
+            --accent-gold-hover: #d4b574; /* Lighter gold for hover */
+            --border-color: #333;
+            --button-bg: var(--accent-gold);
+            --button-text: #0a0a0a;
+            --success-color: #25d366; /* Green for WhatsApp */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, strong {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+        }
+
+        h1 { font-size: 2.5em; text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px;}
+        h2 { font-size: 2em; text-align: center; margin-bottom: 25px; color: var(--accent-gold); }
+        p, li { color: var(--text-dark); }
+        a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-gold-hover); }
+
+        /* Header & Footer */
+        .main-header {
+            background-color: var(--secondary-bg);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center; /* Centraliza a logo */
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header-logo img {
+            max-height: 40px;
+        }
+        
+        .header-left, .header-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .header-left { left: 0; }
+        .header-right { right: 0; }
+        .desktop-nav { display: none; } /* Remove desktop nav links */
+
+        .hamburger-menu {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-menu svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .main-footer {
+            background-color: var(--secondary-bg);
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            margin-top: auto;
+        }
+        .footer-links a {
+            margin: 0 10px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+        .footer-socials {
+            margin: 20px 0;
+        }
+        .footer-socials .social-icon {
+            color: var(--text-dark);
+            margin: 0 10px;
+        }
+        .footer-socials .social-icon:hover {
+            color: var(--accent-gold);
+        }
+        .footer-socials svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Quiz Specific Styles (Mantidos e aprimorados) */
+        .quiz-container {
+            background-color: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--border-color);
+            border-radius: 50%;
+            margin: 0 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-dot.active {
+            background-color: var(--accent-gold);
+            transform: scale(1.2);
+            box-shadow: 0 0 8px var(--accent-gold);
+        }
+
+        .quiz-step {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .quiz-step.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quiz-step h2 {
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .option-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-gold-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .option-card.selected {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(179, 155, 91, 0.6);
+            background-color: rgba(179, 155, 91, 0.1);
+        }
+        
+        .option-card img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .option-card span {
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        /* Color Picker Specific */
+        .color-picker {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .color-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .color-circle:hover {
+            border-color: var(--accent-gold-hover);
+            transform: scale(1.1);
+        }
+        .color-circle.selected {
+            border-color: var(--accent-gold);
+            transform: scale(1.15);
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+        .color-circle[data-color="Preta"] { background-color: #0a0a0a; }
+        .color-circle[data-color="Branca"] { background-color: #ffffff; border: 3px solid var(--text-dark); }
+
+        #selected-color-text {
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        /* Navigation Buttons */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .quiz-btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-grow: 1;
+        }
+
+        .quiz-btn:hover:not(:disabled) {
+            background-color: var(--accent-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .quiz-btn:disabled {
+            background-color: #555;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .quiz-btn.whatsapp-final {
+            background-color: var(--success-color); /* WhatsApp green */
+            color: white;
+            font-size: 1.2em;
+            padding: 15px 30px;
+        }
+
+        .quiz-btn.whatsapp-final:hover:not(:disabled) {
+            background-color: #1faa58;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        #quiz-summary {
+            background-color: var(--primary-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px dashed var(--accent-gold);
+            margin-bottom: 30px;
+            text-align: left;
+            white-space: pre-wrap;
+            font-size: 1.1em;
+        }
+        #quiz-summary strong {
+            color: var(--accent-gold);
+        }
+
+        /* Image Gallery for Product */
+        .product-gallery-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            height: 300px;
+            align-items: center;
+        }
+        .product-gallery-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Modals and other sections (keeping minimal structure) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
+            display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease; z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1; visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--secondary-bg); padding: 30px; border-radius: 8px;
+            max-width: 600px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative; transform: translateY(-50px); opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease; color: var(--text-dark); text-align: left;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0); opacity: 1;
+        }
+
+        .modal-close-btn {
+            position: absolute; top: 15px; right: 15px; background: none; border: none;
+            font-size: 2em; color: var(--text-dark); cursor: pointer; line-height: 1; padding: 0; transition: color 0.3s ease;
+        }
+        .modal-close-btn:hover { color: var(--accent-gold); }
+
+        .modal-content h3 { color: var(--accent-gold); margin-bottom: 20px; text-align: center; }
+
+        .modal-whatsapp-btn {
+            display: block; background-color: var(--success-color); color: white;
+            padding: 12px 20px; border-radius: 6px; text-align: center; margin-top: 25px;
+            transition: background-color 0.3s ease; font-weight: 600;
+        }
+        .modal-whatsapp-btn:hover { background-color: #1faa58; color: white; }
+
+        .size-guide-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .size-guide-table th, .size-guide-table td {
+            border: 1px solid var(--border-color); padding: 10px; text-align: center; color: var(--text-dark);
+        }
+        .size-guide-table th { background-color: var(--primary-bg); color: var(--accent-gold); text-transform: uppercase; }
+        .size-guide-table td strong { color: var(--text-light); }
+        .size-guide-disclaimer { font-size: 0.85em; color: var(--text-dark); margin-top: 10px; }
+
+        /* Preloader */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--primary-bg); display: flex; justify-content: center;
+            align-items: center; z-index: 10000; transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        /* A logo-nash.png do seu print é a que está com o nome 'logo-nash.png' */
+        .preloader img { max-width: 100px; animation: pulse 1.5s infinite ease-in-out; } 
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            position: fixed; top: 0; left: -100%; width: 70%; max-width: 300px; height: 100%;
+            background-color: var(--primary-bg); box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+            padding-top: 80px; z-index: 200; transition: left 0.3s ease; display: flex; flex-direction: column;
+        }
+        .mobile-nav.active { left: 0; }
+        .mobile-nav-link {
+            padding: 15px 20px; color: var(--text-light); text-transform: uppercase;
+            font-weight: 600; border-bottom: 1px solid var(--border-color);
+        }
+        .mobile-nav-link:hover { background-color: var(--secondary-bg); color: var(--accent-gold); }
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); z-index: 150; display: none;
+        }
+        .overlay.active { display: block; }
+        
+        /* Top Bar */
+        .top-bar { background-color: var(--accent-gold); color: var(--button-text); padding: 8px 0; overflow: hidden; white-space: nowrap; text-align: center; font-size: 0.9em; }
+        .marquee-content { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
+        .marquee-content span { margin-right: 50px; font-weight: 500; }
+        .marquee-content strong, .marquee-content a { color: var(--primary-bg); }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* FAB (Floating Action Button) - WhatsApp */
+        .fab-container { position: fixed; bottom: 20px; right: 20px; z-index: 900; display: flex; flex-direction: column; align-items: flex-end; }
+        .whatsapp-promo-box {
+            background-color: var(--secondary-bg); color: var(--text-dark); padding: 10px 15px;
+            border-radius: 8px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease;
+            text-align: right; border: 1px solid var(--border-color);
+        }
+        .whatsapp-promo-box small { font-size: 0.8em; color: var(--text-dark); }
+        .whatsapp-fab:hover + .whatsapp-promo-box { opacity: 1; transform: translateX(0); }
+        .whatsapp-fab {
+            background-color: var(--success-color); color: white; width: 55px; height: 55px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 2em; box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .whatsapp-fab:hover { background-color: #1faa58; transform: scale(1.05); }
+        .whatsapp-fab svg { width: 30px; height: 30px; }
+
+        /* Reveal Effect */
+        .reveal { position: relative; transform: translateY(100px); opacity: 0; transition: all 1s ease; }
+        .reveal.active { transform: translateY(0); opacity: 1; }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            .desktop-nav { display: none; }
+            .header-container { padding: 0 15px; }
+            .quiz-container { padding: 20px; margin: 20px auto; }
+            .options-grid { grid-template-columns: 1fr; }
+            .quiz-btn { font-size: 1em; padding: 10px 15px; }
+            .quiz-navigation { flex-direction: column; gap: 10px; }
+        }
+        @media (min-width: 769px) {
+            .hamburger-menu, .mobile-nav { display: none; }
+            .header-left, .header-right { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <img src="assets/images/logo-nash.png" alt="Carregando Nash Company...">
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="#quiz-section" class="mobile-nav-link">Monte Seu Pedido</a>
+        <a href="#" class="mobile-nav-link" data-modal-target="modal-guia-tamanhos">Guia de Tamanhos</a>
+        <a href="#footer" class="mobile-nav-link">Contato</a>
+    </nav>
+    <div class="overlay" id="mobile-nav-overlay"></div>
+
+    <div class="top-bar">
+        <div class="marquee-content">
+            <span>FRETE GRÁTIS <strong>ACIMA DE R$150</strong></span>
+            <span><a href="https://chat.whatsapp.com/G7vSR9IVGCfLhUhHiTDv2l" target="_blank" rel="noopener noreferrer">ENTRE PARA NOSSO <strong>GRUPO VIP</strong></a></span>
+            <span>ATENDIMENTO EXCLUSIVO NO <strong>WHATSAPP</strong></span>
+            <span>FRETE GRÁTIS <strong>ACIMA DE R$150</strong></span>
+            <span><a href="https://chat.whatsapp.com/G7vSR9IVGCfLhUhHiTDv2l" target="_blank" rel="noopener noreferrer">ENTRE PARA NOSSO <strong>GRUPO VIP</strong></a></span>
+            <span>ATENDIMENTO EXCLUSIVO NO <strong>WHATSAPP</strong></span>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburger-btn" aria-label="Abrir menu">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="#" class="header-logo" aria-label="Página inicial da Nash Company">
+                    <img src="assets/images/logo-nash.png" alt="Logo da Nash Company" class="logo-img">
+                </a>
+            </div>
+            <div class="header-right">
+                <button class="hamburger-menu" data-modal-target="modal-guia-tamanhos" aria-label="Guia de Tamanhos" style="margin-right: 0;">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M18 11l-2 2l-2 -2"></path><path d="M6 11l2 2l2 -2"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="quiz-section" class="container reveal">
+        <div class="quiz-container">
+            <h1>Monte a Sua Peça Exclusiva</h1>
+
+            <div class="step-indicator">
+                <div class="step-dot active" data-step="1"></div>
+                <div class="step-dot" data-step="2"></div>
+                <div class="step-dot" data-step="3"></div>
+                <div class="step-dot" data-step="4"></div>
+            </div>
+
+            <div id="quiz-step-1" class="quiz-step active" data-selection="produto">
+                <h2>1. Escolha o Modelo</h2>
+                <div class="options-grid">
+                    <div class="option-card" data-value="Protea Tee" onclick="selectOption(1, 'Protea Tee')">
+                        <img src="assets/images/pretaestampada-frente.png" alt="Camiseta Protea Tee">
+                        <span>Protea Tee</span>
+                    </div>
+                    <div class="option-card" data-value="Nash Essentials" onclick="selectOption(1, 'Nash Essentials')">
+                        <img src="assets/images/PretalisaFrente.png" alt="Camiseta Nash Essentials">
+                        <span>Nash Essentials</span>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn next-step" onclick="nextStep(1)" disabled>Próxima Etapa</button>
+                </div>
+            </div>
+
+            <div id="quiz-step-2" class="quiz-step" data-selection="tamanho">
+                <h2>2. Escolha o Tamanho</h2>
+                <a href="#" class="size-guide-link" data-modal-target="modal-guia-tamanhos" style="display: inline-block; margin-bottom: 20px;">Ver Guia de Tamanhos</a>
+                <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));">
+                    <div class="option-card" data-value="P" onclick="selectOption(2, 'P')"><span>P</span></div>
+                    <div class="option-card" data-value="M" onclick="selectOption(2, 'M')"><span>M</span></div>
+                    <div class="option-card" data-value="G" onclick="selectOption(2, 'G')"><span>G</span></div>
+                    <div class="option-card" data-value="GG" onclick="selectOption(2, 'GG')"><span>GG</span></div>
+                    <div class="option-card" data-value="XGG" onclick="selectOption(2, 'XGG')"><span>XGG</span></div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn" onclick="prevStep(2)">Voltar</button>
+                    <button class="quiz-btn next-step" onclick="nextStep(2)" disabled>Próxima Etapa</button>
+                </div>
+            </div>
+
+            <div id="quiz-step-3" class="quiz-step" data-selection="cor">
+                <h2>3. Escolha a Cor</h2>
+                <div class="color-picker">
+                    <div class="color-circle" data-color="Preta" onclick="selectOption(3, 'Preta')"></div>
+                    <div class="color-circle" data-color="Branca" onclick="selectOption(3, 'Branca')"></div>
+                </div>
+                <p>Cor Selecionada: <span id="selected-color-text">Nenhuma</span></p>
+
+                <div class="product-gallery-container">
+                    <img id="product-display-image" src="" alt="Preview da Camisa" style="display: none;">
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="quiz-btn" onclick="prevStep(3)">Voltar</button>
+                    <button class="quiz-btn next-step" onclick="nextStep(3)" disabled>Finalizar Pedido</button>
+                </div>
+            </div>
+            
+            <div id="quiz-step-4" class="quiz-step">
+                <h2>4. Resumo do Seu Pedido</h2>
+                <div id="quiz-summary">
+                    Seu pedido aparecerá aqui com todos os detalhes selecionados.
+                </div>
+                <button id="whatsapp-button" class="quiz-btn whatsapp-final" onclick="sendToWhatsApp()" disabled>
+                    Enviar Pedido por WhatsApp
+                </button>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn" onclick="prevStep(4)">Voltar e Editar</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <footer class="main-footer reveal" id="footer">
+        <div class="footer-content container">
+            <nav class="footer-links" aria-label="Navegação do rodapé">
+                <a href="#quiz-section">Monte Seu Pedido</a>
+                <a href="#" data-modal-target="modal-guia-tamanhos">Guia de Tamanhos</a>
+                <a href="#" data-modal-target="modal-termos-uso">Termos de Uso</a> 
+                <a href="#" data-modal-target="modal-politica-privacidade">Política de Privacidade</a>
+            </nav>
+
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/nashcompany.br" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Siga-nos no Instagram">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.227-1.667 4.77-4.919 4.919-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.25-.149-4.77-1.692-4.918-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.668-4.77 4.918-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.441c-3.14 0-3.504.012-4.726.068-2.73.125-3.968 1.36-4.093 4.093-.056 1.222-.068 1.586-.068 4.726s.012 3.504.068 4.726c.125 2.733 1.363 3.968 4.093 4.093 1.222.056 1.586.068 4.726.068s3.504-.012 4.726-.068c2.73-.125 3.968-1.36 4.093-4.093.056-1.222.068-1.586.068-4.726s-.012-3.504-.068-4.726c-.125-2.733-1.363-3.968-4.093-4.093-1.222-.056-1.586-.068-4.726-.068zM12 6.864c-2.838 0-5.136 2.298-5.136 5.136s2.298 5.136 5.136 5.136 5.136-2.298 5.136-5.136S14.838 6.864 12 6.864zm0 8.842c-2.045 0-3.706-1.66-3.706-3.706s1.66-3.706 3.706-3.706 3.706 1.66 3.706 3.706-1.66 3.706-3.706 3.706zm4.864-8.541c-.742 0-1.344.602-1.344 1.344s.602 1.344 1.344 1.344 1.344-.602 1.344-1.344-.602-1.344-1.344-1.344z"/></svg>
+                </a>
+            </div>
+
+            <div class="footer-contact">
+                <p><a href="tel:+5571988689508">(71) 98868-9508</a></p>
+                <p><a href="mailto:nashcompany001@gmail.com">nashcompany001@gmail.com</a></p>
+            </div>
+            <div class="footer-credits">
+                <p class="copyright">Copyright NASH COMPANY - 2025. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fab-container">
+        <a href="https://wa.me/5571988689508" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Entrar em contato via WhatsApp">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 21.94L7.31 20.55C8.76 21.36 10.37 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M17.26 14.23C17.06 14.73 16.03 15.28 15.5 15.36C15.02 15.43 14.39 15.45 14.06 15.3C13.73 15.15 13.2 14.95 12.56 14.31C11.76 13.51 11.23 12.56 11.03 12.26C10.83 11.96 10.72 11.81 10.72 11.61C10.72 11.41 10.87 11.26 11.02 11.11C11.17 10.96 11.34 10.85 11.52 10.7C11.69 10.55 11.79 10.45 11.94 10.2C12.09 9.95 12.14 9.77 12.04 9.62C11.94 9.47 11.44 8.24 11.21 7.74C10.98 7.24 10.76 7.31 10.61 7.31C10.46 7.31 10.31 7.31 10.16 7.31C10.01 7.31 9.74 7.39 9.51 7.64C9.28 7.89 8.78 8.34 8.78 9.24C8.78 10.14 9.54 11.01 9.69 11.21C9.84 11.41 11.21 13.71 13.41 14.61C14.33 15.01 14.93 15.21 15.38 15.38C15.98 15.61 16.5 15.58 16.88 15.53C17.31 15.48 18.01 15.08 18.23 14.53C18.46 13.98 18.46 13.51 18.39 13.41C18.31 13.31 18.11 13.21 17.86 13.06C17.61 12.91 17.46 12.86 17.26 13.11C17.06 13.36 16.81 13.66 16.71 13.81C16.61 13.96 16.51 14.03 16.31 13.93C16.11 13.83 15.48 13.63 14.73 12.96C14.12 12.41 13.73 11.71 13.58 11.46C13.43 11.21 13.33 11.01 13.43 10.86C13.53 10.71 13.68 10.56 13.83 10.41C1." /></svg>
+        </a>
+    </div>
+
+    <div class="modal-overlay" id="modal-guia-tamanhos">
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Fechar pop-up">&times;</button>
+            <h3>📏 Guia de Tamanhos</h3>
+            <p>Compare as medidas (Comprimento x Largura) com uma peça que você já tenha para encontrar o tamanho ideal.</p>
+            <table class="size-guide-table">
+                <thead>
+                    <tr>
+                        <th>Tamanho</th>
+                        <th>Altura (cm)</th>
+                        <th>Largura (cm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>P</strong></td><td>71</td><td>54</td></tr>
+                    <tr><td><strong>M</strong></td><td>72</td><td>56</td></tr>
+                    <tr><td><strong>G</strong></td><td>75</td><td>58</td></tr>
+                    <tr><td><strong>GG</strong></td><td>79.5</td><td>59</td></tr>
+                    <tr><td><strong>XGG</strong></td><td>80</td><td>63</td></tr>
+                </tbody>
+            </table>
+            <p class="size-guide-disclaimer">As medidas podem variar até 5%.</p>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="modal-termos-uso">
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Fechar pop-up">&times;</button>
+            <h3>📄 Termos de Uso</h3>
+            <p>Estes Termos de Uso regem a utilização da loja virtual NASH COMPANY. Ao realizar uma compra, você concorda com todas as cláusulas aqui descritas.</p>
+            <p>Para ler os termos de uso completos, entre em contato.</p>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="modal-politica-privacidade">
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Fechar pop-up">&times;</button>
+            <h3>🔒 Política de Privacidade (LGPD)</h3>
+            <p>A NASH COMPANY leva a sua privacidade a sério. Seus dados pessoais são tratados com o <strong>máximo cuidado</strong>, em conformidade com a Lei Geral de Proteção de Dados (LGPD).</p>
+        </div>
+    </div>
+    
+<script>
+        const STEPS = 4;
+        let currentStep = 1;
+        const selections = {
+            produto: null,
+            tamanho: null,
+            cor: null
+        };
+        const myPhoneNumber = '71988689508';
+
+        // Mapeamento de Imagens CORRIGIDO conforme o seu print
+        const productImages = {
+            "Protea Tee": {
+                "Preta": {
+                    "frente": "assets/images/pretaestampada-frente.png",
+                    "costas": "assets/images/pretaEstampadaAtras.png" // Corrigido de 'pretaestampadaAtras.png' para 'pretaEstampadaAtras.png' (mantendo o case do seu print)
+                },
+                "Branca": {
+                    "frente": "assets/images/BrancaEstampadaFrente.png", // Corrigido
+                    "costas": "assets/images/BrancaEstampadaCostras.png" // Corrigido de 'BrancaestampadaCostras.png' para 'BrancaEstampadaCostras.png'
+                }
+            },
+            "Nash Essentials": {
+                "Preta": {
+                    "frente": "assets/images/PretalisaFrente.png", // Corrigido
+                    "costas": "assets/images/PretaLisaCostas.png" // Corrigido
+                },
+                "Branca": {
+                    "frente": "assets/images/BrancaLisaFrente.png", // Corrigido
+                    "costas": "assets/images/BrancaLisaCostas.png" // Corrigido
+                }
+            }
+        };
+
+        function updateStepDisplay() {
+            for (let i = 1; i <= STEPS; i++) {
+                const stepElement = document.getElementById(`quiz-step-${i}`);
+                if (stepElement) {
+                    if (i === currentStep) {
+                        stepElement.classList.add('active');
+                    } else {
+                        stepElement.classList.remove('active');
+                    }
+                }
+                const dotElement = document.querySelector(`.step-dot[data-step="${i}"]`);
+                if (dotElement) {
+                    if (i <= currentStep) {
+                        dotElement.classList.add('active');
+                    } else {
+                        dotElement.classList.remove('active');
+                    }
+                }
+            }
+            if (currentStep === STEPS) {
+                updateSummary();
+            }
+            // Atualiza a imagem de preview apenas no passo 3
+            if (currentStep === 3) {
+                 updateProductDisplayImage();
+            } else {
+                 document.getElementById('product-display-image').style.display = 'none';
+            }
+            
+             // Role para o topo da seção do quiz
+             document.querySelector('.quiz-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function updateNextButton(step) {
+            const stepElement = document.getElementById(`quiz-step-${step}`);
+            const nextButton = stepElement ? stepElement.querySelector('.next-step') : null;
+            if (!nextButton) return;
+
+            const selectionType = stepElement.getAttribute('data-selection');
+            const isSelected = selections[selectionType] !== null;
+
+            nextButton.disabled = !isSelected;
+            
+            if (step === 3) {
+                 nextButton.textContent = isSelected ? 'Finalizar Pedido' : 'Selecione a Cor';
+            } else if (step === 2) {
+                 nextButton.textContent = isSelected ? `Próxima Etapa (Tamanho: ${selections[selectionType]})` : `Selecione o Tamanho`;
+            } else if (step === 1) {
+                 nextButton.textContent = isSelected ? `Próxima Etapa (Modelo: ${selections[selectionType]})` : `Selecione o Modelo`;
+            }
+        }
+
+        function selectOption(step, value) {
+            const stepElement = document.getElementById(`quiz-step-${step}`);
+            const selectionType = stepElement.getAttribute('data-selection');
+            const optionCards = stepElement.querySelectorAll('.option-card');
+            const colorCircles = stepElement.querySelectorAll('.color-circle');
+            
+            // Clear previous selection
+            optionCards.forEach(card => card.classList.remove('selected'));
+            colorCircles.forEach(circle => circle.classList.remove('selected'));
+
+            // Mark new selection
+            if (selectionType === 'cor') {
+                const selectedColor = stepElement.querySelector(`.color-circle[data-color="${value}"]`);
+                if (selectedColor) {
+                    selectedColor.classList.add('selected');
+                    document.getElementById('selected-color-text').textContent = value;
+                }
+            } else {
+                const selectedCard = stepElement.querySelector(`.option-card[data-value="${value}"]`);
+                 if (selectedCard) {
+                    selectedCard.classList.add('selected');
+                }
+            }
+            
+            selections[selectionType] = value;
+
+            // Clear color selection if product changes
+            if (selectionType === 'produto') {
+                selections.cor = null;
+                document.getElementById('selected-color-text').textContent = 'Nenhuma';
+                document.querySelectorAll('.color-circle').forEach(circle => circle.classList.remove('selected'));
+                updateNextButton(3); // Update button for step 3 
+            }
+
+            updateNextButton(step);
+            if (step === 3) updateProductDisplayImage();
+        }
+
+        function nextStep(current) {
+            const stepElement = document.getElementById(`quiz-step-${current}`);
+            const selectionType = stepElement.getAttribute('data-selection');
+            
+            // Checa se a seleção é válida antes de avançar
+            if (selections[selectionType] !== null) {
+                if (current < STEPS) {
+                    currentStep++;
+                    updateStepDisplay();
+                    updateNextButton(currentStep); 
+                }
+            }
+        }
+
+        function prevStep(current) {
+            if (current > 1) {
+                currentStep--;
+                updateStepDisplay();
+                updateNextButton(currentStep);
+            }
+        }
+        
+        function updateSummary() {
+            // Cria a mensagem mais limpa para o WhatsApp
+            const messageText = `Olá! Gostaria de fazer o seguinte pedido na NASH COMPANY:\n\n*Modelo:* ${selections.produto || 'Não Selecionado'}\n*Tamanho:* ${selections.tamanho || 'Não Selecionado'}\n*Cor:* ${selections.cor || 'Não Selecionada'}\n\nPor favor, confirme a disponibilidade e o valor.`;
+
+            document.getElementById('quiz-summary').textContent = messageText;
+
+            const isComplete = selections.produto && selections.tamanho && selections.cor;
+            const whatsappButton = document.getElementById('whatsapp-button');
+            whatsappButton.disabled = !isComplete;
+            whatsappButton.textContent = isComplete ? '✅ Enviar Pedido por WhatsApp' : '⚠️ Pedido Incompleto';
+        }
+
+        function updateProductDisplayImage() {
+            const productImageElement = document.getElementById('product-display-image');
+            const { produto, cor } = selections;
+
+            // Só tenta carregar se produto e cor estiverem selecionados
+            if (produto && cor && productImages[produto] && productImages[produto][cor]) {
+                productImageElement.src = productImages[produto][cor].frente;
+                productImageElement.alt = `Preview da Camisa ${produto} na cor ${cor} (Frente)`;
+                productImageElement.style.display = 'block';
+            } else if (produto && !cor) {
+                 // Se o produto estiver selecionado, mas a cor não, exibe uma das imagens como default (ex: preto frente)
+                 productImageElement.src = productImages[produto]["Preta"].frente;
+                 productImageElement.alt = `Preview da Camisa ${produto} (Selecione a cor)`;
+                 productImageElement.style.display = 'block';
+            } else {
+                productImageElement.style.display = 'none';
+            }
+        }
+
+        function sendToWhatsApp() {
+            const messageText = document.getElementById('quiz-summary').textContent;
+            const encodedMessage = encodeURIComponent(messageText);
+            const whatsappLink = `https://wa.me/55${myPhoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappLink, '_blank');
+        }
+
+        // Modals Logic
+        document.addEventListener('click', (event) => {
+            const target = event.target;
+            const modalTarget = target.dataset.modalTarget || target.closest('[data-modal-target]')?.dataset.modalTarget;
+
+            if (modalTarget) {
+                const modal = document.getElementById(modalTarget);
+                if (modal) {
+                    modal.classList.add('active');
+                }
+                event.preventDefault(); // Prevent default link action
+            } else if (target.classList.contains('modal-overlay') || target.classList.contains('modal-close-btn')) {
+                const overlay = target.closest('.modal-overlay');
+                if (overlay) overlay.classList.remove('active');
+            }
+        });
+        
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => { // Small delay to show logo before hiding
+                preloader.classList.add('hidden');
+            }, 500);
+        });
+
+        // Hamburger Menu Logic
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+
+        if (hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                mobileNavOverlay.classList.toggle('active');
+            });
+        }
+
+        if (mobileNavOverlay) {
+            mobileNavOverlay.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+            });
+        }
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                mobileNavOverlay.classList.remove('active');
+            });
+        });
+
+
+        // Intersection Observer for reveal effect
+        const revealElements = document.querySelectorAll('.reveal');
+        const options = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStepDisplay();
+            updateNextButton(1); 
+        });
+    </script>
+
+</body>
+</html>
