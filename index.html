@@ -94,8 +94,9 @@
             position: relative;
         }
 
+        /* CORREÇÃO 2: Redução do tamanho da Logo */
         .header-logo img {
-            max-height: 50px; /* Increased logo size */
+            max-height: 35px; 
             transition: transform 0.3s ease;
         }
         .header-logo img:hover {
@@ -155,6 +156,189 @@
             width: 24px;
             height: 24px;
         }
+        
+        /* CORREÇÃO 1: Adicionando CSS para o Marquee (Top Bar) */
+        .top-bar {
+            background-color: var(--accent-gold); 
+            color: var(--primary-bg);
+            padding: 8px 0;
+            overflow: hidden; /* Chave para esconder o conteúdo que rola */
+            position: relative;
+            font-size: 0.85em;
+            font-weight: 600;
+            height: 30px; 
+            box-sizing: border-box;
+        }
+
+        .marquee-content {
+            width: 200%; /* Duas vezes a largura para repetição */
+            display: flex;
+            gap: 50px;
+            position: absolute;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-content span {
+            flex-shrink: 0; /* Impede que os itens encolham */
+            white-space: nowrap; 
+        }
+
+        .marquee-content a {
+            color: var(--primary-bg);
+        }
+        .marquee-content strong {
+            color: var(--primary-bg);
+            font-weight: 700;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Rola exatamente metade do conteúdo */
+        }
+        
+        /* Preloader Styles (Fix Geral) */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader img {
+            max-width: 150px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* CORREÇÃO 3: Redução do tamanho do FAB do WhatsApp */
+        .fab-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        .whatsapp-fab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px; /* Tamanho do FAB */
+            height: 55px; /* Tamanho do FAB */
+            background-color: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-fab:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-fab svg {
+            width: 30px; /* Tamanho do ícone */
+            height: 30px; /* Tamanho do ícone */
+            color: var(--text-light);
+            fill: currentColor;
+        }
+        
+        /* CORREÇÃO 4: Estilização do Modal (Guia de Tamanhos) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 450px;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 2em;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        .modal-close-btn:hover {
+            color: var(--accent-gold);
+        }
+        
+        .size-guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .size-guide-table th, .size-guide-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: var(--text-dark);
+        }
+
+        .size-guide-table th {
+            background-color: #222;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .size-guide-table tr:nth-child(even) {
+            background-color: #111;
+        }
+
+        .size-guide-disclaimer {
+            font-size: 0.85em;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
 
         /* Quiz Specific Styles */
         .quiz-container {
@@ -405,7 +589,7 @@
                 <h2>1. Escolha o Modelo</h2>
                 <div class="options-grid">
                     <div class="option-card" data-value="Protea Tee" onclick="selectOption(1, 'Protea Tee')">
-                        <img src="assets/pretaestampada-frente.png" alt="Camiseta Protea Tee">
+                        <img src="assets/pretaEstampadaAtras.png" alt="Camiseta Protea Tee - Estampa Costa">
                         <span>Protea Tee</span>
                     </div>
                     <div class="option-card" data-value="Nash Essentials" onclick="selectOption(1, 'Nash Essentials')">
