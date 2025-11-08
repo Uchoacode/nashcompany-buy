@@ -836,6 +836,14 @@
 
             <div id="quiz-step-6" class="quiz-step">
                 <h2>6. Resumo do Seu Pedido</h2>
+                <div class="alert-box" style="background-color: rgba(179, 155, 91, 0.2); border: 1px solid var(--accent-gold); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: var(--text-light); margin: 0; font-weight: 600;">
+                        ⚠️ *ATENÇÃO: Você será redirecionado para o WhatsApp de Rian Uchôa.
+                        <br>
+                        O número está correto, mesmo que não apareça a foto oficial da Nash Company.
+                    </p>
+                </div>
+                
                 <div id="quiz-summary">
                     Seu pedido aparecerá aqui com todos os detalhes selecionados.
                 </div>
@@ -978,7 +986,7 @@
             }
         };
         
-        // NOVO: Função para formatar o CEP (00000-000) e limitar o número de dígitos
+        // Função para formatar o CEP (00000-000) e limitar o número de dígitos
         function formatCep(input) {
             let value = input.value.replace(/\D/g, ''); // Remove non-digits
             
@@ -1288,10 +1296,10 @@
             const localizacao = selections.localizacao;
             const complemento = localizacao.complemento && localizacao.complemento.length > 0 ? ` (Comp: ${localizacao.complemento})` : '';
 
-            // Mensagem simplificada: Mais fácil de ler, menos caracteres especiais.
-            const whatsappMessage = `👋 Olá, Nash Company! Gostaria de fazer um novo pedido.
+            // Mensagem simplificada e profissional, com identificação do atendente
+            const whatsappMessage = `👋 Olá, Nash Company! Gostaria de fazer um novo pedido (Atendente: Natália - R1 Uchoa).
         
-*📦 DETALHES DO PRODUTO:*
+*🛍️ DETALHES DO PRODUTO*
 Modelo: *${selections.produto}*
 Tamanho: *${selections.tamanho}*
 Cor: *${selections.cor}*
@@ -1300,7 +1308,7 @@ Preço Unitário Estimado: ${precoUnitarioFormatado}
         
 *💰 VALOR TOTAL ESTIMADO:* ${precoTotalFormatado}
         
-*📍 DADOS PARA ENTREGA:*
+*📍 DADOS PARA ENTREGA*
 Endereço: ${localizacao.endereco}${complemento}
 Bairro: ${localizacao.bairro}
 Cidade/UF: ${localizacao.cidade} - ${localizacao.estado}
