@@ -161,17 +161,18 @@
         .top-bar {
             background-color: var(--accent-gold); 
             color: var(--primary-bg);
-            padding: 8px 0;
-            overflow: hidden; /* Chave para esconder o conteúdo que rola */
+            padding: 12px 0; 
+            overflow: hidden; 
             position: relative;
-            font-size: 0.85em;
-            font-weight: 600;
-            height: 30px; 
+            font-size: 1em; 
+            font-weight: 700; 
+            height: 40px; 
             box-sizing: border-box;
+            border-bottom: 3px solid var(--primary-bg); 
         }
 
         .marquee-content {
-            width: 200%; /* Duas vezes a largura para repetição */
+            width: 200%; 
             display: flex;
             gap: 50px;
             position: absolute;
@@ -179,7 +180,7 @@
         }
 
         .marquee-content span {
-            flex-shrink: 0; /* Impede que os itens encolham */
+            flex-shrink: 0; 
             white-space: nowrap; 
         }
 
@@ -193,7 +194,7 @@
 
         @keyframes marquee {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Rola exatamente metade do conteúdo */
+            100% { transform: translateX(-50%); } 
         }
         
         /* Preloader Styles (Fix Geral) */
@@ -226,7 +227,7 @@
             100% { transform: scale(1.1); opacity: 1; }
         }
 
-        /* CORREÇÃO 3: Redução do tamanho do FAB do WhatsApp */
+        /* FAB do WhatsApp */
         .fab-container {
             position: fixed;
             bottom: 25px;
@@ -237,8 +238,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 55px; /* Tamanho do FAB */
-            height: 55px; /* Tamanho do FAB */
+            width: 55px; 
+            height: 55px; 
             background-color: var(--success-color);
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -250,13 +251,13 @@
         }
 
         .whatsapp-fab svg {
-            width: 30px; /* Tamanho do ícone */
-            height: 30px; /* Tamanho do ícone */
+            width: 30px; 
+            height: 30px; 
             color: var(--text-light);
             fill: currentColor;
         }
         
-        /* CORREÇÃO 4: Estilização do Modal (Guia de Tamanhos) */
+        /* Estilização do Modal (Guia de Tamanhos) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -496,6 +497,62 @@
             text-align: center !important;
         }
         /* End Quiz Enhancements */
+        
+        /* NEW FORM INPUT STYLE */
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .text-input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+            box-shadow: 0 0 5px rgba(179, 155, 91, 0.5);
+        }
+        
+        /* QUANTITY INPUT STYLE */
+        .quantity-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 250px;
+        }
+        .quantity-input {
+            width: 80px;
+            text-align: center;
+            -moz-appearance: textfield; /* Firefox hides arrows */
+        }
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .quantity-btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .quantity-btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+        /* END QUANTITY INPUT STYLE */
+
 
         /* --- PASSO 3 DESIGN REFINADO --- */
         .color-picker {
@@ -582,27 +639,22 @@
 
         /* Image Gallery for Product */
         .product-gallery-container {
-            height: 350px; /* Increased size for better preview */
+            height: 350px; 
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0; /* Espaçamento da galeria */
+            margin: 20px 0; 
         }
         .product-gallery-container img {
             max-height: 100%;
             max-width: 100%;
-            transition: opacity 0.4s ease-in-out, transform 0.3s ease-out; /* Added smooth transition */
+            transition: opacity 0.4s ease-in-out, transform 0.3s ease-out; 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
             border-radius: 8px;
         }
         .product-gallery-container img.fading {
             opacity: 0;
             transform: scale(0.95);
-        }
-
-        /* Mobile Nav */
-        .mobile-nav-link {
-            transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
         }
         
         /* Responsive Adjustments */
@@ -614,20 +666,25 @@
             .quiz-btn { width: 100%;}
         }
 
-        /* Responsive Fix for options-grid on small screens (added improvement) */
+        /* Fix para mobile: Imagens visíveis no passo 1 e layout vertical */
         @media (max-width: 480px) {
             .options-grid {
                 grid-template-columns: 1fr; /* Single column layout on very small screens */
             }
             .option-card {
-                flex-direction: row;
-                justify-content: space-between;
+                /* Reverte para layout vertical para mostrar imagem e texto */
+                flex-direction: column;
+                justify-content: center;
                 min-height: auto;
                 padding: 15px 20px;
-                text-align: left;
+                text-align: center; /* Centraliza o texto */
             }
             .option-card img {
-                display: none; /* Hide images on very small cards to save space */
+                /* Garante que a imagem seja exibida, mas reduz o tamanho */
+                display: block !important; 
+                max-width: 80%; /* Reduz a largura */
+                max-height: 120px; /* Constrain height */
+                margin: 0 auto 15px auto; /* Centraliza a imagem e adiciona margem inferior */
             }
             .option-card span {
                  margin-bottom: 0;
@@ -644,13 +701,6 @@
         <img src="assets/logo-nash.png" alt="Carregando Nash Company...">
     </div>
 
-    <nav class="mobile-nav" id="mobile-nav">
-        <a href="#quiz-section" class="mobile-nav-link">Monte Seu Pedido</a>
-        <a href="#" class="mobile-nav-link" data-modal-target="modal-guia-tamanhos">Guia de Tamanhos</a>
-        <a href="#footer" class="mobile-nav-link">Contato</a>
-    </nav>
-    <div class="overlay" id="mobile-nav-overlay"></div>
-
     <div class="top-bar">
         <div class="marquee-content">
             <span>FRETE GRÁTIS <strong>ACIMA DE R$150</strong></span>
@@ -665,12 +715,7 @@
     <header class="main-header">
         <div class="header-container">
             <div class="header-left">
-                <button class="hamburger-menu" id="hamburger-btn" aria-label="Abrir menu">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
+                </div>
             <div class="header-center">
                 <a href="#" class="header-logo" aria-label="Página inicial da Nash Company">
                     <img src="assets/logo-nash.png" alt="Logo da Nash Company" class="logo-img">
@@ -692,8 +737,7 @@
                 <div class="step-dot active" data-step="1"></div>
                 <div class="step-dot" data-step="2"></div>
                 <div class="step-dot" data-step="3"></div>
-                <div class="step-dot" data-step="4"></div>
-            </div>
+                <div class="step-dot" data-step="4"></div> <div class="step-dot" data-step="5"></div> <div class="step-dot" data-step="6"></div> </div>
 
             <div id="quiz-step-1" class="quiz-step active" data-selection="produto">
                 <h2>1. Escolha o Modelo</h2>
@@ -716,7 +760,9 @@
 
             <div id="quiz-step-2" class="quiz-step" data-selection="tamanho">
                 <h2>2. Escolha o Tamanho</h2>
-                <a href="#" class="size-guide-link" data-modal-target="modal-guia-tamanhos" style="display: inline-block; margin-bottom: 20px;">Ver Guia de Tamanhos</a>
+                <button type="button" class="quiz-btn" data-modal-target="modal-guia-tamanhos" style="background-color: var(--accent-gold); color: var(--primary-bg); margin-bottom: 25px;">
+                    📏 Ver Guia de Tamanhos
+                </button>
                 <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));">
                     <div class="option-card" data-value="P" onclick="selectOption(2, 'P')"><span>P</span></div>
                     <div class="option-card" data-value="M" onclick="selectOption(2, 'M')"><span>M</span></div>
@@ -744,12 +790,46 @@
 
                 <div class="quiz-navigation">
                     <button class="quiz-btn" onclick="prevStep(3)">Voltar</button>
-                    <button class="quiz-btn next-step" onclick="nextStep(3)" disabled>Finalizar Pedido</button>
+                    <button class="quiz-btn next-step" onclick="nextStep(3)" disabled>Próxima Etapa</button>
+                </div>
+            </div>
+
+            <div id="quiz-step-4" class="quiz-step" data-selection="quantidade">
+                <h2>4. Quantidade de Peças</h2>
+                <p>Selecione quantas peças deste modelo, tamanho e cor você deseja.</p>
+                <div class="quantity-input-container">
+                    <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                    <input type="number" id="quantidade-input" value="1" min="1" class="text-input quantity-input" onchange="selectQuantity(this.value)" oninput="this.value = Math.abs(this.value)">
+                    <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                </div>
+                <p style="margin-top: 15px;">Preço Total Estimado: <span id="total-price-display" class="price-highlight">R$ 82,99</span></p>
+
+                <div class="quiz-navigation">
+                    <button class="quiz-btn" onclick="prevStep(4)">Voltar</button>
+                    <button class="quiz-btn next-step" onclick="nextStep(4)">Próxima Etapa</button>
                 </div>
             </div>
             
-            <div id="quiz-step-4" class="quiz-step">
-                <h2>4. Resumo do Seu Pedido</h2>
+            <div id="quiz-step-5" class="quiz-step" data-selection="localizacao">
+                <h2>5. Dados de Localização</h2>
+                <p>Preencha com o endereço de entrega para o cálculo de frete e envio.</p>
+                <div class="form-grid" style="display: grid; gap: 15px; max-width: 500px; margin: 0 auto;">
+                    <input type="text" id="endereco" placeholder="Endereço (Rua, Número)" required class="text-input">
+                    <input type="text" id="complemento" placeholder="Complemento (Apto, Bloco, Opcional)" class="text-input">
+                    <input type="text" id="bairro" placeholder="Bairro" required class="text-input">
+                    <input type="text" id="cidade" placeholder="Cidade" required class="text-input">
+                    <input type="text" id="estado" placeholder="Estado (Ex: BA)" required class="text-input" maxlength="2">
+                    <input type="text" id="cep" placeholder="CEP (00000-000)" required class="text-input" pattern="\d{5}-?\d{3}">
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="quiz-btn" onclick="prevStep(5)">Voltar</button>
+                    <button class="quiz-btn next-step" onclick="nextStep(5)" disabled>Próxima Etapa</button>
+                </div>
+            </div>
+
+            <div id="quiz-step-6" class="quiz-step">
+                <h2>6. Resumo do Seu Pedido</h2>
                 <div id="quiz-summary">
                     Seu pedido aparecerá aqui com todos os detalhes selecionados.
                 </div>
@@ -757,7 +837,7 @@
                     Enviar Pedido por WhatsApp
                 </button>
                 <div class="quiz-navigation">
-                    <button class="quiz-btn" onclick="prevStep(4)">Voltar e Editar</button>
+                    <button class="quiz-btn" onclick="prevStep(6)">Voltar e Editar</button>
                 </div>
             </div>
 
@@ -838,24 +918,34 @@
     </div>
     
 <script>
-        const STEPS = 4;
+        const STEPS = 6; // Alterado de 5 para 6
         let currentStep = 1;
         
-        // NOVO: Adicionado objeto de preços
+        // Objeto de preços base
         const PRICES = {
-            "Protea Tee": 82.99, // Estampada
-            "Nash Essentials": 59.99 // Lisa
+            "Protea Tee": 82.99, 
+            "Nash Essentials": 59.99 
         };
         
         const selections = {
             produto: null,
             tamanho: null,
             cor: null,
-            preco: null // NOVO: Campo para armazenar o preço
+            quantidade: 1, // NOVO CAMPO
+            localizacao: { 
+                endereco: null,
+                complemento: null,
+                bairro: null,
+                cidade: null,
+                estado: null,
+                cep: null
+            },
+            precoUnitario: null, // Preço de uma peça
+            precoTotal: 0 // NOVO: Preço final calculado
         };
         const myPhoneNumber = '71988689508';
 
-        // Mapeamento de Imagens CORRIGIDO
+        // Mapeamento de Imagens
         const productImages = {
             "Protea Tee": {
                 "Preta": {
@@ -878,6 +968,42 @@
                 }
             }
         };
+
+        function calculatePrice() {
+            if (selections.precoUnitario && selections.quantidade > 0) {
+                selections.precoTotal = selections.precoUnitario * selections.quantidade;
+            } else {
+                selections.precoTotal = 0;
+            }
+            // Atualiza o display no Passo 4
+            const priceDisplay = document.getElementById('total-price-display');
+            if (priceDisplay) {
+                priceDisplay.textContent = selections.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
+        }
+        
+        function updateQuantity(change) {
+            const input = document.getElementById('quantidade-input');
+            let newQuantity = parseInt(input.value) + change;
+            
+            if (newQuantity < 1) {
+                newQuantity = 1; 
+            }
+            
+            input.value = newQuantity;
+            selectQuantity(newQuantity);
+        }
+
+        function selectQuantity(value) {
+            let quantity = parseInt(value);
+            if (isNaN(quantity) || quantity < 1) {
+                quantity = 1;
+            }
+            selections.quantidade = quantity;
+            document.getElementById('quantidade-input').value = quantity;
+            calculatePrice();
+            updateNextButton(4); 
+        }
 
         function updateStepDisplay() {
             for (let i = 1; i <= STEPS; i++) {
@@ -904,12 +1030,17 @@
             // Atualiza a imagem de preview apenas no passo 3
             if (currentStep === 3) {
                  updateProductDisplayImage();
+            } else if (currentStep === 4) {
+                 // Garante que o preço seja calculado e exibido no Passo 4
+                 calculatePrice();
             } else {
                  document.getElementById('product-display-image').style.display = 'none';
             }
             
              // Role para o topo da seção do quiz
              document.querySelector('.quiz-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+             
+             updateNextButton(currentStep);
         }
 
         function updateNextButton(step) {
@@ -918,18 +1049,49 @@
             if (!nextButton) return;
 
             const selectionType = stepElement.getAttribute('data-selection');
-            const isSelected = selections[selectionType] !== null;
-
-            nextButton.disabled = !isSelected;
+            let isSelected = selections[selectionType] !== null;
             
-            if (step === 3) {
-                 nextButton.textContent = isSelected ? 'Finalizar Pedido' : 'Selecione a Cor';
+            // Lógica específica para o passo de Quantidade (Step 4)
+            if (step === 4) {
+                 const quantity = parseInt(document.getElementById('quantidade-input').value);
+                 isSelected = !isNaN(quantity) && quantity >= 1;
+                 
+                 nextButton.textContent = isSelected ? `Próxima Etapa (${quantity} Peça${quantity > 1 ? 's' : ''})` : 'Selecione a Quantidade';
+            
+            // Lógica específica para o passo de Localização (Step 5)
+            } else if (step === 5) {
+                 const endereco = document.getElementById('endereco').value.trim();
+                 const bairro = document.getElementById('bairro').value.trim();
+                 const cidade = document.getElementById('cidade').value.trim();
+                 const estado = document.getElementById('estado').value.trim();
+                 const cep = document.getElementById('cep').value.trim();
+
+                 // Validação: todos os campos obrigatórios devem estar preenchidos
+                 isSelected = endereco && bairro && cidade && estado && cep;
+
+                 // Armazena temporariamente os dados do formulário na seleção
+                 if (isSelected) {
+                     selections.localizacao.endereco = endereco;
+                     selections.localizacao.complemento = document.getElementById('complemento').value.trim();
+                     selections.localizacao.bairro = bairro;
+                     selections.localizacao.cidade = cidade;
+                     selections.localizacao.estado = estado;
+                     selections.localizacao.cep = cep;
+                 }
+                 
+                 nextButton.textContent = isSelected ? 'Próxima Etapa (Localização Preenchida)' : 'Preencha os Campos Obrigatórios';
+
+            } else if (step === 3) {
+                 nextButton.textContent = isSelected ? 'Próxima Etapa' : 'Selecione a Cor';
             } else if (step === 2) {
                  nextButton.textContent = isSelected ? `Próxima Etapa (Tamanho: ${selections[selectionType]})` : `Selecione o Tamanho`;
             } else if (step === 1) {
                  nextButton.textContent = isSelected ? `Próxima Etapa (Modelo: ${selections[selectionType]})` : `Selecione o Modelo`;
             }
+
+            nextButton.disabled = !isSelected;
         }
+
 
         function selectOption(step, value) {
             const stepElement = document.getElementById(`quiz-step-${step}`);
@@ -937,6 +1099,12 @@
             const optionCards = stepElement.querySelectorAll('.option-card');
             const colorCircles = stepElement.querySelectorAll('.color-circle');
             
+            // Ignorar passos que não são baseados em seleção de cards/círculos
+            if (step === 4 || step === 5) {
+                updateNextButton(step); 
+                return;
+            }
+
             // Clear previous selection
             optionCards.forEach(card => card.classList.remove('selected'));
             colorCircles.forEach(circle => circle.classList.remove('selected'));
@@ -957,28 +1125,34 @@
             
             selections[selectionType] = value;
 
-            // NOVO: Lógica de preço e limpeza de cor se o produto mudar
+            // Lógica de preço e limpeza de cor se o produto mudar
             if (selectionType === 'produto') {
-                selections.preco = PRICES[value]; // Define o preço
+                selections.precoUnitario = PRICES[value]; // Define o preço unitário
                 
                 // Limpa a seleção de cor se o produto mudar
                 selections.cor = null;
                 document.getElementById('selected-color-text').textContent = 'Nenhuma';
                 document.querySelectorAll('.color-circle').forEach(circle => circle.classList.remove('selected'));
-                updateNextButton(3); // Atualiza o botão do passo 3
+                updateNextButton(3); 
+                
+                // Redefine a quantidade para 1 ao mudar o produto
+                selectQuantity(1);
             }
-            // FIM NOVO
 
+            calculatePrice();
             updateNextButton(step);
             if (step === 3) updateProductDisplayImage();
         }
 
         function nextStep(current) {
             const stepElement = document.getElementById(`quiz-step-${current}`);
-            const selectionType = stepElement.getAttribute('data-selection');
             
-            // Checa se a seleção é válida antes de avançar
-            if (selections[selectionType] !== null) {
+            // Valida o passo atual
+            updateNextButton(current); 
+            const isSelectionValid = !stepElement.querySelector('.next-step').disabled;
+
+
+            if (isSelectionValid) {
                 if (current < STEPS) {
                     currentStep++;
                     updateStepDisplay();
@@ -991,82 +1165,103 @@
             if (current > 1) {
                 currentStep--;
                 updateStepDisplay();
-                updateNextButton(currentStep);
             }
         }
         
-        // NOVO: Função updateSummary modificada para incluir o preço
         function updateSummary() {
-            // Formata o preço para o padrão brasileiro R$ X,XX
-            const precoFormatado = selections.preco ? selections.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Preço Não Definido';
+            // Formata os preços para o padrão brasileiro
+            const precoUnitarioFormatado = selections.precoUnitario ? selections.precoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Preço Não Definido';
+            const precoTotalFormatado = selections.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            
+            const localizacao = selections.localizacao;
+            const enderecoFormatado = localizacao.complemento && localizacao.complemento.length > 0 ? 
+                `${localizacao.endereco}, ${localizacao.complemento}` : 
+                localizacao.endereco;
+            
+            const localizacaoHtml = `
+                <h4 style="color: var(--accent-gold); margin-top: 20px; margin-bottom: 5px;">📍 Local de Entrega</h4>
+                <p><strong>Endereço:</strong> ${localizacao.endereco && localizacao.endereco.length > 0 ? enderecoFormatado : 'Não Preenchido'}</p>
+                <p><strong>Bairro:</strong> ${localizacao.bairro || 'Não Preenchido'}</p>
+                <p><strong>Cidade/Estado:</strong> ${localizacao.cidade || 'Não Preenchido'} - ${localizacao.estado || 'XX'}</p>
+                <p><strong>CEP:</strong> ${localizacao.cep || 'Não Preenchido'}</p>
+            `;
             
             // Conteúdo HTML para o resumo
             const summaryHtml = `
-                <p><strong>Modelo:</strong> ${selections.produto || 'Não Selecionado'}</p>
+                <p><strong>Modelo:</strong> ${selections.produto || 'Não Selecionado'} (${precoUnitarioFormatado} / unid.)</p>
                 <p><strong>Tamanho:</strong> ${selections.tamanho || 'Não Selecionado'}</p>
                 <p><strong>Cor:</strong> ${selections.cor || 'Não Selecionada'}</p>
-                <p class="final-price-tag"><strong>Preço Estimado:</strong> <span class="price-highlight">${precoFormatado}</span></p>
-                <p class="summary-disclaimer">Este é o resumo do seu pedido. Clique em "Enviar Pedido por WhatsApp" para confirmar a disponibilidade e o valor final com um atendente.</p>
+                <p><strong>Quantidade:</strong> ${selections.quantidade || 0}</p>
+                ${localizacaoHtml}
+                <p class="final-price-tag" style="margin-top: 20px;"><strong>Preço TOTAL Estimado:</strong> <span class="price-highlight">${precoTotalFormatado}</span></p>
+                <p class="summary-disclaimer">Este é o resumo do seu pedido. Clique em "Enviar Pedido por WhatsApp" para confirmar a disponibilidade, valor final e frete com um atendente.</p>
             `;
 
             document.getElementById('quiz-summary').innerHTML = summaryHtml;
-
-            // Mensagem para o WhatsApp (Incluindo o preço)
-            const messageText = `Olá! Gostaria de fazer o seguinte pedido na NASH COMPANY:\n\n*Modelo:* ${selections.produto || 'Não Selecionado'}\n*Tamanho:* ${selections.tamanho || 'Não Selecionado'}\n*Cor:* ${selections.cor || 'Não Selecionada'}\n*Preço Estimado:* ${precoFormatado}\n\nPor favor, confirme a disponibilidade e o valor final.`;
             
-            const isComplete = selections.produto && selections.tamanho && selections.cor;
+            // Verifica a validade dos campos
+            const isLocationComplete = localizacao.endereco && localizacao.bairro && localizacao.cidade && localizacao.estado && localizacao.cep;
+            const isComplete = selections.produto && selections.tamanho && selections.cor && selections.quantidade > 0 && isLocationComplete;
+
             const whatsappButton = document.getElementById('whatsapp-button');
             whatsappButton.disabled = !isComplete;
             whatsappButton.textContent = isComplete ? '✅ Enviar Pedido por WhatsApp' : '⚠️ Pedido Incompleto';
         }
-        // FIM NOVO
 
         function updateProductDisplayImage() {
             const productImageElement = document.getElementById('product-display-image');
             const { produto, cor } = selections;
 
-            productImageElement.classList.add('fading'); // Start fade effect
+            productImageElement.classList.add('fading'); 
 
             setTimeout(() => {
-                 // Só tenta carregar se produto e cor estiverem selecionados
                 if (produto && cor && productImages[produto] && productImages[produto][cor]) {
                     productImageElement.src = productImages[produto][cor].frente;
                     productImageElement.alt = `Preview da Camisa ${produto} na cor ${cor} (Frente)`;
                     productImageElement.style.display = 'block';
                 } else if (produto && !cor) {
-                     // Se o produto estiver selecionado, mas a cor não, exibe uma das imagens como default (ex: preto frente)
-                     // O default deve ser a imagem de um produto para a cor preta (ou a cor mais comum)
                      const defaultColor = 'Preta'; 
                      if (productImages[produto] && productImages[produto][defaultColor]) {
                          productImageElement.src = productImages[produto][defaultColor].frente;
                          productImageElement.alt = `Preview da Camisa ${produto} (Selecione a cor)`;
                          productImageElement.style.display = 'block';
                      } else {
-                         productImageElement.style.display = 'none'; // Caso não encontre nem a imagem default
+                         productImageElement.style.display = 'none'; 
                      }
-
                 } else {
                     productImageElement.style.display = 'none';
                 }
                 
-                productImageElement.classList.remove('fading'); // End fade effect
-            }, 300); // Match the CSS transition time
+                productImageElement.classList.remove('fading'); 
+            }, 300); 
            
         }
 
         function sendToWhatsApp() {
-            const messageText = document.getElementById('quiz-summary').textContent;
-            // Para extrair apenas o texto da mensagem formatada para o WhatsApp
-            const precoFormatado = selections.preco ? selections.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Preço Não Definido';
+            const precoUnitarioFormatado = selections.precoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            const precoTotalFormatado = selections.precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             
-            // A mensagem completa para o WhatsApp
-            const whatsappMessage = `Olá! Gostaria de fazer o seguinte pedido na NASH COMPANY:
-*Modelo:* ${selections.produto || 'Não Selecionado'}
-*Tamanho:* ${selections.tamanho || 'Não Selecionado'}
-*Cor:* ${selections.cor || 'Não Selecionada'}
-*Preço Estimado:* ${precoFormatado}
+            const localizacao = selections.localizacao;
+            const complemento = localizacao.complemento && localizacao.complemento.length > 0 ? ` (${localizacao.complemento})` : '';
 
-Por favor, confirme a disponibilidade e o valor final.`;
+            // A mensagem completa para o WhatsApp, incluindo quantidade e preço total
+            const whatsappMessage = `Olá! Gostaria de fazer o seguinte pedido na NASH COMPANY:
+
+*--- Detalhes do Pedido ---*
+*Modelo:* ${selections.produto}
+*Tamanho:* ${selections.tamanho}
+*Cor:* ${selections.cor}
+*Quantidade:* ${selections.quantidade}
+*Preço Unitário Estimado:* ${precoUnitarioFormatado}
+*Preço TOTAL Estimado:* ${precoTotalFormatado}
+
+*--- Local de Entrega ---*
+*Endereço:* ${localizacao.endereco}${complemento}
+*Bairro:* ${localizacao.bairro}
+*Cidade/Estado:* ${localizacao.cidade} - ${localizacao.estado}
+*CEP:* ${localizacao.cep}
+
+Por favor, confirme a disponibilidade, o valor final e o custo do frete para o local de entrega.`;
             
             const encodedMessage = encodeURIComponent(whatsappMessage.trim());
             const whatsappLink = `https://wa.me/55${myPhoneNumber}?text=${encodedMessage}`;
@@ -1083,7 +1278,7 @@ Por favor, confirme a disponibilidade e o valor final.`;
                 if (modal) {
                     modal.classList.add('active');
                 }
-                event.preventDefault(); // Prevent default link action
+                event.preventDefault(); 
             } else if (target.classList.contains('modal-overlay') || target.classList.contains('modal-close-btn')) {
                 const overlay = target.closest('.modal-overlay');
                 if (overlay) overlay.classList.remove('active');
@@ -1093,36 +1288,10 @@ Por favor, confirme a disponibilidade e o valor final.`;
         // Preloader Logic
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            setTimeout(() => { // Small delay to show logo before hiding
+            setTimeout(() => { 
                 preloader.classList.add('hidden');
             }, 500);
         });
-
-        // Hamburger Menu Logic
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-
-        if (hamburgerBtn) {
-            hamburgerBtn.addEventListener('click', () => {
-                mobileNav.classList.toggle('active');
-                mobileNavOverlay.classList.toggle('active');
-            });
-        }
-
-        if (mobileNavOverlay) {
-            mobileNavOverlay.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-            });
-        }
-        mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-            });
-        });
-
 
         // Intersection Observer for reveal effect
         const revealElements = document.querySelectorAll('.reveal');
@@ -1140,10 +1309,24 @@ Por favor, confirme a disponibilidade e o valor final.`;
             observer.observe(element);
         });
 
-        // Initial setup
+        // Initial setup and Location Input Listener
         document.addEventListener('DOMContentLoaded', () => {
+            // Define o preço unitário inicial para o primeiro produto para evitar erro no Passo 4
+            selections.precoUnitario = PRICES["Protea Tee"]; 
+            calculatePrice();
+
             updateStepDisplay();
             updateNextButton(1); 
+            
+             // Adicionar listeners para campos de localização para habilitar o botão
+             const locationInputs = document.querySelectorAll('#quiz-step-5 input');
+             locationInputs.forEach(input => {
+                 input.addEventListener('input', () => {
+                     if (currentStep === 5 || currentStep === 6) {
+                        updateNextButton(5);
+                     }
+                 });
+             });
         });
     </script>
 
